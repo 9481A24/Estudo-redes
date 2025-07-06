@@ -1,1 +1,154 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estudos de Redes e Cyber Segurança</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f7f9fc;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #005f73;
+    }
+    pre {
+      background: #e0e0e0;
+      padding: 10px;
+      overflow-x: auto;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+    section {
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #005f73;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #005f73;
+      color: white;
+    }
+    ul, ol {
+      margin-left: 20px;
+    }
+    .note {
+      background: #fff3bf;
+      border-left: 4px solid #f7b500;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Estudos de Redes e Cyber Segurança</h1>
+
+  <section id="script-scanner-arps">
+    <h2>Script Python para Scanner ARP na Rede Local</h2>
+    <p>Esse script usa <code>scapy</code> para descobrir dispositivos conectados na sua rede local.</p>
+    <pre><code>from scapy.all import ARP, Ether, srp
+
+def scan(rede):
+    arp = ARP(pdst=rede)
+    ether = Ether(dst="ff:ff:ff:ff:ff:ff")
+    pacote = ether/arp
+
+    result = srp(pacote, timeout=3, verbose=0)[0]
+
+    dispositivos = []
+    for enviado, recebido in result:
+        dispositivos.append({"ip": recebido.psrc, "mac": recebido.hwsrc})
+
+    return dispositivos
+
+rede = "192.168.0.1/24"
+dispositivos = scan(rede)
+
+print("Dispositivos encontrados na rede:")
+print("IP\t\tMAC")
+for dispositivo in dispositivos:
+    print(f"{dispositivo['ip']}\t{dispositivo['mac']}")</code></pre>
+  </section>
+
+  <section id="roteadores-e-portas">
+    <h2>IPs e Portas Comuns de Roteadores</h2>
+    <p>Lista rápida dos IPs padrões e portas comuns:</p>
+
+    <h3>🔹 IP padrão dos roteadores mais comuns</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th>IP padrão</th>
+          <th>Usuário padrão</th>
+          <th>Senha padrão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>TP-Link</td><td>192.168.0.1</td><td>admin</td><td>admin</td></tr>
+        <tr><td>D-Link</td><td>192.168.0.1</td><td>admin</td><td>(em branco)</td></tr>
+        <tr><td>Cisco</td><td>192.168.1.1</td><td>admin</td><td>admin</td></tr>
+        <tr><td>Intelbras</td><td>10.0.0.1</td><td>admin</td><td>admin</td></tr>
+        <tr><td>Huawei</td><td>192.168.100.1</td><td>admin</td><td>admin</td></tr>
+        <tr><td>Linksys</td><td>192.168.1.1</td><td>admin</td><td>admin</td></tr>
+        <tr><td>Mikrotik</td><td>192.168.88.1</td><td>admin</td><td>(em branco)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>🔹 Portas comuns usadas por roteadores</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Porta</th>
+          <th>Serviço</th>
+          <th>Uso comum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>80</td><td>HTTP</td><td>Interface web padrão (config)</td></tr>
+        <tr><td>443</td><td>HTTPS</td><td>Interface web segura</td></tr>
+        <tr><td>23</td><td>Telnet</td><td>Acesso remoto não seguro</td></tr>
+        <tr><td>22</td><td>SSH</td><td>Acesso remoto seguro</td></tr>
+        <tr><td>7547</td><td>TR-069 (gerenciamento ISP)</td><td>Configuração remota ISP</td></tr>
+        <tr><td>8080</td><td>HTTP alternativo</td><td>Algumas interfaces web</td></tr>
+        <tr><td>554</td><td>RTSP</td><td>Streaming de câmeras IP (se integrado)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>🔹 Como acessar a interface do roteador</h3>
+    <ol>
+      <li>Abrir navegador e digitar o IP padrão (exemplo: <code>192.168.0.1</code>).</li>
+      <li>Colocar usuário e senha padrão (ex: <code>admin</code>/<code>admin</code>).</li>
+      <li>Se não acessar, descobrir IP do gateway no computador ou celular.</li>
+    </ol>
+
+    <h3>🔹 Dicas importantes</h3>
+    <ul>
+      <li>Nunca use IPs públicos para acessar roteadores de terceiros.</li>
+      <li>Sempre faça testes em redes autorizadas.</li>
+      <li>Mude as senhas padrão para maior segurança.</li>
+    </ul>
+  </section>
+
+</body>
+</html>
+
+
